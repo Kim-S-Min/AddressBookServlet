@@ -1,4 +1,4 @@
-package miniprojectservlet;
+package servlet.dao;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,8 +8,8 @@ import java.util.Date;
 public class PhoneBookDAOImpl implements PhoneBookDAO {
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
+		
 		try {
-			//	드라이버 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
 			conn = DriverManager.getConnection(dburl, "C##KSMIN", "1234");
@@ -22,6 +22,7 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 	@Override
 	public List<PhoneBookVo> getList() {
 		List<PhoneBookVo> list = new ArrayList<>();
+		
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -29,9 +30,8 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			
 			String sql = "SELECT id, name, hp, tel, create_at " +
-					"FROM phone_book ORDER BY create_at DESC";
+					"FROM phone_book ORDER BY create_at";
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
@@ -111,7 +111,7 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 		
 		try {
 			conn = getConnection();
-			String sql = "INSERT INTO phone_book" +
+			String sql = "INSERT INTO phone_book " +
 						"(id, name, hp, tel) " +
 						"VALUES(seq_phone_book.NEXTVAL, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
@@ -126,7 +126,9 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 			try {
 				pstmt.close();
 				conn.close();
-			} catch (Exception e) {}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return insertedCount == 1;
 	}

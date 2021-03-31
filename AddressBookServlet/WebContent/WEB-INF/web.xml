@@ -13,8 +13,7 @@ id="WebApp_ID" version="4.0">
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-	<!-- 컨텍스트 파라미터
-		웹 어플리케이션 내의 모든 서블릿, JSP가 공유할 수 있는 정보: 공용 설정 정보 -->
+	<!-- 컨텍스트 파라미터 공용 설정 정보 -->
 	<context-param>
 		<param-name>dburl</param-name>
 		<param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
@@ -40,20 +39,6 @@ id="WebApp_ID" version="4.0">
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	<!-- 서블릿 등록 -->
-	<servlet>
-		<servlet-name>HelloServlet</servlet-name> 
-		<servlet-class>servlet.HelloServlet</servlet-class>
-
-	</servlet>
-
-	<!-- 서블릿 매핑: 실제 서블릿 클래스가 어떤 url에 응답을 돌려줘야 할지 -->
-	<servlet-mapping>
-		<servlet-name>HelloServlet</servlet-name>
-		<url-pattern>/hs</url-pattern>
-	</servlet-mapping>
-
 
 	<servlet>
 		<servlet-name>LifecycleServlet</servlet-name>

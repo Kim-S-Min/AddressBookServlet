@@ -1,4 +1,4 @@
-package miniprojectservlet;
+package servlet.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,33 +10,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name="Emaillist", urlPatterns="/el")
-public class PhoneBookServlet extends HttpServlet {
+import servlet.dao.PhoneBookDAO;
+import servlet.dao.PhoneBookDAOImpl;
+import servlet.dao.PhoneBookVo;
 
-	
+@WebServlet(name="PhoneBook", urlPatterns="/el")
+public class PhoneBookServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PhoneBookDAO dao = new PhoneBookDAOImpl();
 		String action = req.getParameter("a");	
+		
+		System.out.println(action);
 		
 		if ("form".equals(action)) {
 			RequestDispatcher rd = 
-							getServletContext().getRequestDispatcher("/WEB-INF/views/emaillist/form.jsp");
+				getServletContext().getRequestDispatcher("/WEB-INF/views/emaillist/form.jsp");
 			rd.forward(req, resp);
+			
+		} else if("search".equals(action)) {
+			String keyword = req.getParameter("keyword");
+			List<PhoneBookVo> list = dao.search(keyword);
+			req.setAttribute("list", list);
+			req.setAttribute("keyword", keyword);
+			RequestDispatcher rd = req.getRequestDispatcher("/");
+			rd.forward(req, resp);	
 			
 		} else  if ("delete".equals(action)) {
 			Long no = Long.valueOf(req.getParameter("no"));
-			PhoneBookDAO dao = new PhoneBookDAOImpl();
 			dao.delete(no);
 			resp.sendRedirect(req.getContextPath() + "/el");
 			
 		} else {
-			PhoneBookDAO dao = new PhoneBookDAOImpl();
 			List<PhoneBookVo> list = dao.getList();
 			req.setAttribute("list", list);	
 			
 			RequestDispatcher rd =
-					getServletContext().getRequestDispatcher("/WEB-INF/views/emaillist/index.jsp");
+				getServletContext().getRequestDispatcher("/WEB-INF/views/emaillist/index.jsp");
 			rd.forward(req, resp);
 		}
 	}
@@ -63,7 +74,5 @@ public class PhoneBookServlet extends HttpServlet {
 		} else {
 			doGet(req, resp);
 		}
-	}
-
-	
+	}	
 }

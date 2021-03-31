@@ -1,4 +1,4 @@
-package miniprojectservlet;
+package servlet.dao;
 
 import java.util.Date;
 
