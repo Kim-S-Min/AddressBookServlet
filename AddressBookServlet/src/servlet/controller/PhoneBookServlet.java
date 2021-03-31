@@ -22,20 +22,18 @@ public class PhoneBookServlet extends HttpServlet {
 		PhoneBookDAO dao = new PhoneBookDAOImpl();
 		String action = req.getParameter("a");	
 		
-		System.out.println(action);
-		
-		if ("form".equals(action)) {
-			RequestDispatcher rd = 
-				getServletContext().getRequestDispatcher("/WEB-INF/views/emaillist/form.jsp");
-			rd.forward(req, resp);
-			
-		} else if("search".equals(action)) {
+		if("search".equals(action)) {
 			String keyword = req.getParameter("keyword");
 			List<PhoneBookVo> list = dao.search(keyword);
 			req.setAttribute("list", list);
 			req.setAttribute("keyword", keyword);
-			RequestDispatcher rd = req.getRequestDispatcher("/");
+			RequestDispatcher rd = req.getRequestDispatcher("/el");
 			rd.forward(req, resp);	
+			
+		} else if ("form".equals(action)) {
+				RequestDispatcher rd = 
+					getServletContext().getRequestDispatcher("/WEB-INF/views/emaillist/form.jsp");
+				rd.forward(req, resp);
 			
 		} else  if ("delete".equals(action)) {
 			Long no = Long.valueOf(req.getParameter("no"));
@@ -67,9 +65,7 @@ public class PhoneBookServlet extends HttpServlet {
 			vo.setTel(tel);
 			
 			PhoneBookDAO dao = new PhoneBookDAOImpl();
-			
 			dao.insert(vo);
-			
 			resp.sendRedirect(req.getContextPath() + "/el");
 		} else {
 			doGet(req, resp);

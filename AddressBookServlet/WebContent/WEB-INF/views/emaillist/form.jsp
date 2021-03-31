@@ -32,9 +32,5 @@
 			</th>
 		</tr>
 	</table>
-	<p>
-		<a href="<c:url value="/"/>">목록보기</a>
-	</p>
-
 </body>
 </html>

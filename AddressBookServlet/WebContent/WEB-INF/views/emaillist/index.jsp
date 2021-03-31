@@ -1,5 +1,3 @@
-<%@page import="servlet.dao.PhoneBookVo"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,7 +14,7 @@
 	
 
 	<!-- Search -->
-	<form action="<c:url value='/servlet'/>">
+	<form action="<c:url value="/el"/>">
 		<input type="hidden" name="action" value="search"/>
 		검색어
 		<input type="text" name="keyword" id=:keyword/>

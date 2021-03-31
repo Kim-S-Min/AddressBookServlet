@@ -21,11 +21,10 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 	
 	@Override
 	public List<PhoneBookVo> getList() {
-		List<PhoneBookVo> list = new ArrayList<>();
-		
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		List<PhoneBookVo> list = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
@@ -96,11 +95,6 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 			}
 		}
 		return list;
-	}
-
-	@Override
-	public PhoneBookVo get(Long id) {
-		return null;
 	}
 
 	@Override
