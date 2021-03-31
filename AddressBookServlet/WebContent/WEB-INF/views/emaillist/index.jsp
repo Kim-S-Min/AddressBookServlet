@@ -15,26 +15,26 @@
 
 	<!-- Search -->
 	<form action="<c:url value="/el"/>">
-		<input type="hidden" name="action" value="search"/>
+		<input type="hidden" name="a" value="search"/>
 		검색어
 		<input type="text" name="keyword" id=:keyword/>
 		&nbsp;
 		<input type="submit"value="검색"/>
 		<br/><br/>
 	</form>
-<input type="hidden" name="action" value="delete">
+<input type="hidden" name="a" value="delete">
 <table border=1>
 	<thead>
 		<tr>
 			<!-- Table Header -->
-			<td>이름</td>
-			<td>휴대전화</td>
-			<td>전화번호</td>
-			<td>도구</td>	
+			<th>이름</th>
+			<th>휴대전화</th>
+			<th>전화번호</th>
+			<th>도구</th>	
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${ list }" var="vo">
+		<c:forEach items="${ list }" var="vo" varStatus="status">
 			<tr>
 				<!-- Table Date -->
 				<td>${ vo.name }</td>

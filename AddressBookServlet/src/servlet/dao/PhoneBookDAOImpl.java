@@ -70,7 +70,6 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 					"FROM phone_book WHERE name LIKE ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + keyword + "%");
-			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -79,6 +78,7 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 				vo.setName(rs.getString(2));
 				vo.setHp(rs.getString(3));
 				vo.setTel(rs.getString(4));
+				vo.setCreateAt(rs.getDate(5));
 				
 				list.add(vo);
 			}

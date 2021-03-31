@@ -27,7 +27,7 @@ public class PhoneBookServlet extends HttpServlet {
 			List<PhoneBookVo> list = dao.search(keyword);
 			req.setAttribute("list", list);
 			req.setAttribute("keyword", keyword);
-			RequestDispatcher rd = req.getRequestDispatcher("/el");
+			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/emaillist/index.jsp");
 			rd.forward(req, resp);	
 			
 		} else if ("form".equals(action)) {
@@ -44,8 +44,8 @@ public class PhoneBookServlet extends HttpServlet {
 			List<PhoneBookVo> list = dao.getList();
 			req.setAttribute("list", list);	
 			
-			RequestDispatcher rd =
-				getServletContext().getRequestDispatcher("/WEB-INF/views/emaillist/index.jsp");
+			RequestDispatcher rd = 
+					getServletContext().getRequestDispatcher("/WEB-INF/views/emaillist/index.jsp");
 			rd.forward(req, resp);
 		}
 	}
